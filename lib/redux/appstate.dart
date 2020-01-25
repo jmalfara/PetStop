@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterRedux/domain/model/account.dart';
 import 'package:flutterRedux/redux/action/account.dart';
-import 'package:flutterRedux/redux/middleware/account.dart';
+import 'package:flutterRedux/redux/middleware/requestlogging.dart';
 import 'package:redux/redux.dart';
 import 'package:flutterRedux/redux/action/tab_navigation.dart';
 
@@ -11,7 +11,7 @@ class AppState {
 
   AppState({
     @required this.account,
-    @required this.currentTab,
+    @required this.currentTab
   });
 
   AppState.initialState() :
@@ -30,6 +30,6 @@ AppState appStateReducer(AppState state, action) {
 // Middleware
 List<Function(Store<AppState> store, dynamic, NextDispatcher)> appStateMiddleware() {
   return [
-    accountServiceMiddleware
+    requestLoggingMiddleware
   ];
 }

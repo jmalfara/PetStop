@@ -1,6 +1,7 @@
 import 'package:async/async.dart';
 import 'package:flutterRedux/base/preferences/preferences.dart';
 import 'package:flutterRedux/redux/appstate.dart';
+import 'package:flutterRedux/redux/middleware/requestlogging.dart';
 import 'package:flutterRedux/service/response.dart';
 import 'package:flutterRedux/service/services.dart';
 import 'package:redux/redux.dart';
@@ -9,13 +10,18 @@ class ViewModel {
   final Store<AppState> store;
   Preferences _preferences = PreferencesImpl();
   Preferences get preferences => _preferences;
-
   Services _services = ServicesImpl();
   Services get services => _services;
 
   ViewModel(this.store);
 
-  Stream<ServiceResponse<T>> executeRequest<T>(Future<T> Function() requestFunction) async* {
+  Stream<ServiceResponse<T>> executeRequest<T>(Future<T> Function() requestFunction) {
+    var stream = _executeRequest(requestFunction).asBroadcastStream();
+    store.dispatch(RequestAction(stream));
+    return stream;
+  }
+
+  Stream<ServiceResponse<T>> _executeRequest<T>(Future<T> Function() requestFunction) async* {
     yield ServiceResponse(state: RequestState.LOADING);
 
     var resultFuture = ResultFuture<T>(requestFunction());

@@ -9,7 +9,7 @@ import 'package:flutterRedux/ui/core/core_viewmodel.dart';
 class CoreEntry extends StatelessWidget {
 
   final List<Widget> screens = [
-    LoginEntry(),
+    Text("Screen1"),
     Text("Screen2"),
     Text("Screen3"),
   ];
