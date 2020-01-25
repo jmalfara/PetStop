@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutterRedux/base/extensions/streamextensions.dart';
 import 'package:flutterRedux/domain/model/session.dart';
 import 'package:flutterRedux/service/response.dart';
 import 'package:redux/redux.dart';
@@ -13,16 +13,18 @@ class LoginAction extends RequestAction<Session> {
   LoginAction(
       this.username,
       this.password,
-      Future<ServiceResponse<Session>> Function() executeRequest
-      ) : super(executeRequest);
+      Stream<ServiceResponse<Session>> streamRequest
+      ) : super(streamRequest);
 }
 
 // Middleware
 void accountServiceMiddleware(Store<AppState> store, action, NextDispatcher next) async {
   if (action is LoginAction) {
-    print("Running Login Action");
-    var response = await action.executeRequest();
-    print(response.state);
+    action.streamRequest.singleObserve(
+      success: (data) => print("Success: $data"),
+      failure: (error) => print("Failure: $error"),
+      loading: () => print("Loading")
+    );
   }
 
   next(action);

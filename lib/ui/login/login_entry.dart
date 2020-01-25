@@ -1,7 +1,7 @@
-import 'dart:async';
-
+import 'package:flutterRedux/base/extensions/streamextensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterRedux/base/notify.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:flutterRedux/redux/appstate.dart';
@@ -16,7 +16,7 @@ class LoginEntry extends StatelessWidget {
               body: Center(
                   child: viewModel.loading()
                       ? _renderLoading()
-                      : _renderLogin(viewModel)),
+                      : _renderLogin(context, viewModel)),
             ));
   }
 
@@ -24,9 +24,11 @@ class LoginEntry extends StatelessWidget {
     return CircularProgressIndicator();
   }
 
-  _renderLogin(LoginViewModel viewModel) {
+  _renderLogin(BuildContext context, LoginViewModel viewModel) {
     return FlatButton(
-      onPressed: () => viewModel.onRequestLogin("username", "password"),
+      onPressed: () => viewModel.onRequestLogin("username", "password").singleObserve(
+        success: (data) => showSnackbar(context, data.authToken)
+      ),
       child: Text("Start Login"),
     );
   }

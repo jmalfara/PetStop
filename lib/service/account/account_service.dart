@@ -20,8 +20,6 @@ class AccountServiceImpl extends AccountService {
   Future<Session> login() async {
     // Simulated call
     await Future.delayed(Duration(seconds: 5), () {});
-//
-//    throw Exception("Error!");
 
     return Session(
       authToken: "ABCD",

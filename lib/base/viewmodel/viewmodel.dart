@@ -7,13 +7,17 @@ import 'package:redux/redux.dart';
 
 class ViewModel {
   final Store<AppState> store;
+  Preferences _preferences = PreferencesImpl();
+  Preferences get preferences => _preferences;
 
-  Preferences preferences = PreferencesImpl();
-  Services services = ServicesImpl();
+  Services _services = ServicesImpl();
+  Services get services => _services;
 
   ViewModel(this.store);
 
-  Future<ServiceResponse<T>> executeRequest<T>(Future<T> Function() requestFunction) async {
+  Stream<ServiceResponse<T>> executeRequest<T>(Future<T> Function() requestFunction) async* {
+    yield ServiceResponse(state: RequestState.LOADING);
+
     var resultFuture = ResultFuture<T>(requestFunction());
 
     try {
@@ -25,16 +29,27 @@ class ViewModel {
     var result = resultFuture.result;
     if (result.isError) {
       var error = resultFuture.result.asError.error;
-      return ServiceResponse(
+      yield ServiceResponse(
         state: RequestState.FAILURE,
         error: error.toString()
       );
     } else {
       var response = resultFuture.result.asValue.value;
-      return ServiceResponse(
+      yield ServiceResponse(
           state: RequestState.SUCCESS,
           success: response
       );
     }
+  }
+}
+
+// For testing. Use with care.
+extension ViewModelTestingExtension on ViewModel {
+  inject({
+    Preferences preferences,
+    Services services
+  }) {
+    this._preferences = preferences;
+    this._services = services;
   }
 }
