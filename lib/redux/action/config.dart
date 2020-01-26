@@ -7,6 +7,7 @@ class StoreConfigAction {
 
 Config configReducer(Config prev, action) {
   if (action is StoreConfigAction) {
+    print("Storing Config ${action.config.latestVersion}");
     return action.config;
   }
 

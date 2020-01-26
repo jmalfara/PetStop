@@ -15,7 +15,7 @@ class AppState {
   AppState({
     @required this.account,
     @required this.config,
-    @required this.currentTab
+    @required this.currentTab,
   });
 
   AppState.initialState() :
@@ -29,7 +29,7 @@ AppState appStateReducer(AppState state, action) {
   return AppState(
     account: accountReducer(state.account, action),
     config:  configReducer(state.config, action),
-    currentTab: tabNavigationReducer(state.currentTab, action),
+    currentTab: tabNavigationReducer(state.currentTab, action)
   );
 }
 

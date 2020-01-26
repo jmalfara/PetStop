@@ -6,20 +6,24 @@ import 'package:flutterRedux/ui/router_generator.dart';
 
 void main() => runApp(MyApp());
 
+final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    final Store<AppState> store = Store<AppState>(
+
+  final Store<AppState> store = Store<AppState>(
       appStateReducer,
       initialState: AppState.initialState(),
       middleware: appStateMiddleware()
-    );
+  );
 
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
     return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
         title: 'Flutter Demo',
+        navigatorKey: navigatorKey,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

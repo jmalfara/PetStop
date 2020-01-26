@@ -12,11 +12,11 @@ class RequestAction<T> {
 // Middleware
 void requestLoggingMiddleware(Store<AppState> store, action, NextDispatcher next) async {
   if (action is RequestAction) {
-    action.streamRequest.singleObserve(
-      success: (data) => print("Middleware Success: $data"),
-      failure: (error) => print("Middleware Failure: $error"),
-      loading: () => print("Middleware Loading")
-    );
+//    action.streamRequest.singleObserve(
+//      success: (data) => print("Middleware Success: $data"),
+//      failure: (error) => print("Middleware Failure: $error"),
+//      loading: () => print("Middleware Loading")
+//    );
   }
 
   next(action);

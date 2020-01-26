@@ -20,7 +20,7 @@ class CoreEntry extends StatelessWidget {
         converter: (Store<AppState> store) => CoreViewModel(store),
         builder: (BuildContext context, CoreViewModel viewModel) => Scaffold(
               appBar: AppBar(
-                title: Text("${viewModel.config.latestVersion}"),
+                title: Text("${viewModel.config}"),
               ),
               body: screens[viewModel.currentTab],
               bottomNavigationBar: BottomNavigationBar(
@@ -29,7 +29,7 @@ class CoreEntry extends StatelessWidget {
                 items: [
                   BottomNavigationBarItem(
                     icon: new Icon(Icons.rss_feed),
-                    title: new Text('Home'),
+                    title: Text("Home"),
                   ),
                   BottomNavigationBarItem(
                     icon: new Icon(Icons.bookmark),

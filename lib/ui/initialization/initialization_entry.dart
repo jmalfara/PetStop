@@ -11,24 +11,22 @@ class InitializationEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: _InnerComponent()
-      )
-    );
-  }
-}
-
-class _InnerComponent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return StoreConnector<AppState, InitializationViewModel>(
-        onInitialBuild: (viewModel) {
-          viewModel.onFetchConfig().singleObserve(
-            success: (data) => controlHandleFetchConfigSuccess(viewModel, context, data)
-          );
-        },
-        converter: (Store<AppState> store) => InitializationViewModel(store),
-        builder: (BuildContext context, InitializationViewModel viewModel) => CircularProgressIndicator()
+        body: Center(
+            child: StoreConnector<AppState, InitializationViewModel>(
+                distinct: true,
+                onInitialBuild: (viewModel) => viewModel.onFetchConfig().singleObserve(
+                      success: (data) => controlHandleFetchConfigSuccess(viewModel, context, data)
+                ),
+                converter: (Store<AppState> store) => InitializationViewModel(store),
+                builder: (BuildContext context, InitializationViewModel viewModel) =>
+                    FlatButton(
+                      onPressed: () => viewModel.onFetchConfig().singleObserve(
+                          success: (data) => controlHandleFetchConfigSuccess(
+                              viewModel, context, data)),
+                      child: CircularProgressIndicator()
+                    )
+            )
+        )
     );
   }
 }
