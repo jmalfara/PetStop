@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterRedux/ui/login/login_entry.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:flutterRedux/redux/appstate.dart';
@@ -18,15 +17,15 @@ class CoreEntry extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return StoreConnector<AppState, CoreViewModel>(
-        converter: (Store<AppState> store) => CoreViewModel.create(store),
+        converter: (Store<AppState> store) => CoreViewModel(store),
         builder: (BuildContext context, CoreViewModel viewModel) => Scaffold(
               appBar: AppBar(
-                title: Icon(Icons.add),
+                title: Text("${viewModel.config.latestVersion}"),
               ),
-              body: screens[viewModel.currentTabIndex],
+              body: screens[viewModel.currentTab],
               bottomNavigationBar: BottomNavigationBar(
-                currentIndex: viewModel.currentTabIndex,
-                onTap: viewModel.onNavigateToTab,
+                currentIndex: viewModel.currentTab,
+                onTap: (index) => viewModel.currentTab = index,
                 items: [
                   BottomNavigationBarItem(
                     icon: new Icon(Icons.rss_feed),

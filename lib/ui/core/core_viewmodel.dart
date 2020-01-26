@@ -1,24 +1,14 @@
+import 'package:flutterRedux/base/viewmodel/viewmodel.dart';
+import 'package:flutterRedux/domain/model/config.dart';
 import 'package:redux/redux.dart';
 import 'package:flutterRedux/redux/appstate.dart';
 import 'package:flutterRedux/redux/action/tab_navigation.dart';
 
-class CoreViewModel {
-  final Function(int) onNavigateToTab;
-  final int currentTabIndex;
+class CoreViewModel extends ViewModel {
+  CoreViewModel(Store<AppState> store) : super(store);
 
-  CoreViewModel({
-    this.onNavigateToTab,
-    this.currentTabIndex
-  });
+  set currentTab(int currentTabIndex) => store.dispatch(NavigateToTabAction(currentTabIndex));
+  int get currentTab => store.state.currentTab;
 
-  factory CoreViewModel.create(Store<AppState> store) {
-    _onNavigateToTab(index) {
-      store.dispatch(NavigateToTabAction(index));
-    }
-
-    return CoreViewModel(
-      currentTabIndex: store.state.currentTab,
-      onNavigateToTab: _onNavigateToTab
-    );
-  }
+  Config get config => store.state.config;
 }
