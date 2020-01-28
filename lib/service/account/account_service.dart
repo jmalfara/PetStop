@@ -28,8 +28,12 @@ class AccountServiceImpl extends AccountService {
   }
 
   @override
-  getAccount() {
-    // TODO: implement getAccount
-    return null;
+  getAccount() async {
+    // Simulated call
+    await Future.delayed(Duration(seconds: 5), () {});
+
+    return Account(
+
+    );
   }
 }

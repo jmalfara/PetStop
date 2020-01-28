@@ -28,16 +28,17 @@ class CoreEntry extends StatelessWidget {
                 onTap: (index) => viewModel.currentTab = index,
                 items: [
                   BottomNavigationBarItem(
-                    icon: new Icon(Icons.rss_feed),
+                    icon: new Icon(Icons.favorite),
                     title: Text("Home"),
                   ),
                   BottomNavigationBarItem(
-                    icon: new Icon(Icons.bookmark),
+                    icon: new Icon(Icons.account_circle),
                     title: new Text('Messages'),
                   ),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.settings),
-                      title: Text('Profile'))
+                      icon: Icon(Icons.calendar_today),
+                      title: Text('Profile')
+                  )
                 ],
               ),
             ));
