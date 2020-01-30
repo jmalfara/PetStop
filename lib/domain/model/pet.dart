@@ -1,7 +1,13 @@
 class Pet {
-  String name;
-  String age;
-  PetType type;
+  final String name;
+  final String birthday;
+  final PetType type;
+
+  Pet({
+    this.name,
+    this.birthday,
+    this.type
+  });
 }
 
 enum PetType {

@@ -1,5 +1,4 @@
 import 'package:flutterRedux/domain/model/session.dart';
-import 'package:flutterRedux/redux/action/account.dart';
 import 'package:flutterRedux/redux/action/session.dart';
 import 'package:flutterRedux/service/response.dart';
 import 'package:redux/redux.dart';

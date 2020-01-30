@@ -13,7 +13,7 @@ class Account {
     this.id,
     this.email,
     this.name,
-    this.pets,
+    this.pets = const [],
     this.loading = false
   });
 
