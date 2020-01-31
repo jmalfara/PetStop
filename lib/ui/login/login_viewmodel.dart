@@ -1,3 +1,4 @@
+import 'package:flutterRedux/domain/model/account.dart';
 import 'package:flutterRedux/domain/model/session.dart';
 import 'package:flutterRedux/redux/action/session.dart';
 import 'package:flutterRedux/service/response.dart';
@@ -11,12 +12,15 @@ class LoginViewModel extends ViewModel {
   Stream<ServiceResponse<Session>> request;
 
   Stream<ServiceResponse<Session>> onRequestLogin(String username, String password) {
-    request = executeRequest<Session>(services.accountService.login);
-    return request;
+    return executeRequest<Session>(services.accountService.login);
+  }
+
+  Stream<ServiceResponse<Account>> onFetchAccount() {
+    return executeRequest<Account>(services.accountService.getAccount);
   }
 
   set loading(bool loading) => store.dispatch(LoadingSessionAction(loading));
-  bool get loading => store.state.session.loading;
+  bool get loading => store.state.session.loading == true;
 
   set session(Session session) => store.dispatch(StoreSessionAction(session));
   Session get session => store.state.session;

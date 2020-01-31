@@ -6,9 +6,11 @@ class MessageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Container(
-        child: Text("Empty"),
-      ),
+        child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          child: Text("asdfasd"),
+        )
     );
   }
 }

@@ -25,8 +25,11 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         navigatorKey: navigatorKey,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-          brightness: Brightness.dark,
+          scaffoldBackgroundColor: Colors.grey[100],
+          buttonTheme: ButtonThemeData(
+            textTheme: ButtonTextTheme.primary,
+            shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
+          )
         ),
         initialRoute: RouteGenerator.routeInitialization,
         onGenerateRoute: RouteGenerator.generateRoute,

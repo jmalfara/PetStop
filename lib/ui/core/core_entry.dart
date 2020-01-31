@@ -22,7 +22,6 @@ class CoreEntry extends StatelessWidget {
         builder: (BuildContext context, CoreViewModel viewModel) => Scaffold(
               body: SafeArea(
                 child: Container(
-                  color: Theme.of(context).backgroundColor,
                   child: screens[viewModel.currentTab],
                 ),
               ),

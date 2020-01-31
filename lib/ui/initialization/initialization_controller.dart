@@ -7,5 +7,5 @@ import '../../main.dart';
 
 controlHandleFetchConfigSuccess(InitializationViewModel viewModel, BuildContext context, Config config) {
   viewModel.config = config;
-  navigatorKey.currentState.pushReplacementNamed(RouteGenerator.routeCore);
+  navigatorKey.currentState.pushReplacementNamed(RouteGenerator.routeLogin);
 }
