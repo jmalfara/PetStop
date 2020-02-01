@@ -1,15 +1,19 @@
+import 'package:flutterRedux/base/stateful.dart';
 import 'package:flutterRedux/domain/model/account.dart';
+import 'package:flutterRedux/redux/action/stateful.dart';
 
-class LoadingAccountAction {
-  bool loading;
-  LoadingAccountAction(this.loading);
+class StoreAccountAction {
+  Account account;
+  StoreAccountAction(this.account);
 }
 
-Account accountReducer(Account prev, action) {
-  if (action is LoadingAccountAction) {
-    return prev.copy(
-      loading: action.loading
-    );
+Stateful<Account> accountReducer(Stateful<Account> prev, action) {
+  if (action is UpdateStatefulAction && action.object == prev) {
+    return prev.copy(state: action.state);
+  }
+
+  if (action is StoreAccountAction) {
+    return prev.copy(data: action.account);
   }
 
   return prev;

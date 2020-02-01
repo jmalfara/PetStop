@@ -6,15 +6,12 @@ class Account {
   final String email;
   final String name;
   final List<Pet> pets;
-  // TODO Does this belong in the model?
-  final bool loading;
 
   Account({
     this.id,
     this.email,
     this.name,
-    this.pets = const [],
-    this.loading = false
+    this.pets = const []
   });
 
   Account copy({
@@ -22,15 +19,13 @@ class Account {
     String id,
     String email,
     String name,
-    List<Pet> pets,
-    bool loading
+    List<Pet> pets
   }) {
     return Account(
       id: id ?? this.id,
       email: email ?? this.email,
       name: name ?? this.name,
-      pets: pets,
-      loading: loading ?? false
+      pets: pets
     );
   }
 }

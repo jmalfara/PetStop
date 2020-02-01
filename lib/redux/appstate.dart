@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterRedux/base/stateful.dart';
 import 'package:flutterRedux/domain/model/account.dart';
 import 'package:flutterRedux/domain/model/config.dart';
 import 'package:flutterRedux/domain/model/session.dart';
@@ -11,8 +12,8 @@ import 'package:flutterRedux/redux/action/tab_navigation.dart';
 import 'action/session.dart';
 
 class AppState {
-  final Account account;
-  final Session session;
+  final Stateful<Account> account;
+  final Stateful<Session> session;
   final Config config;
   final int currentTab;
 
@@ -24,8 +25,8 @@ class AppState {
   });
 
   AppState.initialState() :
-        account = Account(),
-        session = Session(),
+        account = Stateful(data: Account()),
+        session = Stateful(data: Session()),
         config = Config(),
         currentTab = 0;
 }

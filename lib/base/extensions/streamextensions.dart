@@ -5,12 +5,10 @@ import 'package:flutterRedux/service/response.dart';
 empty([c]) {}
 
 extension StreamServiceResponseExtension<T> on Stream<ServiceResponse<T>> {
-  static const _FUNCTION_EMPTY = empty;
-
   singleObserve({
-    Function() loading = _FUNCTION_EMPTY,
-    Function(T data) success = _FUNCTION_EMPTY,
-    Function(String data) failure = _FUNCTION_EMPTY,
+    Function() loading = empty,
+    Function(T data) success = empty,
+    Function(String data) failure = empty,
   }) {
     StreamSubscription subscription;
     subscription = this.listen((data) {

@@ -17,5 +17,5 @@ class CoreViewModel extends ViewModel {
 
   String get config => store.state.config.latestVersion;
 
-  Account get account => store.state.account;
+  Account get account => store.state.account.data;
 }

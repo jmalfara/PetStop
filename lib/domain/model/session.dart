@@ -1,23 +1,19 @@
 class Session {
   final String authToken;
   final String refreshToken;
-  final bool loading;
 
   Session({
     this.authToken,
-    this.refreshToken,
-    this.loading
+    this.refreshToken
   });
 
   Session copy({
     String authToken,
-    String refreshToken,
-    bool loading
+    String refreshToken
   }) {
     return Session(
       authToken: authToken,
-      refreshToken: refreshToken,
-      loading: loading
+      refreshToken: refreshToken
     );
   }
 }

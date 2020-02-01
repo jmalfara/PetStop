@@ -1,24 +1,20 @@
+import 'package:flutterRedux/base/stateful.dart';
 import 'package:flutterRedux/domain/model/session.dart';
+import 'package:flutterRedux/redux/action/stateful.dart';
 
 class StoreSessionAction {
   Session session;
   StoreSessionAction(this.session);
 }
 
-class LoadingSessionAction {
-  bool loading;
-  LoadingSessionAction(this.loading);
-}
-
-
-Session sessionReducer(Session prev, action) {
-  if (action is StoreSessionAction) {
-    return action.session;
+Stateful<Session> sessionReducer(Stateful<Session> prev, action) {
+  if (action is UpdateStatefulAction && action.object == prev) {
+    return prev.copy(state: action.state);
   }
 
-  if (action is LoadingSessionAction) {
+  if (action is StoreSessionAction) {
     return prev.copy(
-        loading: action.loading
+      data: action.session
     );
   }
 
