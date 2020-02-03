@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutterRedux/base/stateful.dart';
 import 'package:flutterRedux/domain/model/account.dart';
 import 'package:flutterRedux/domain/model/config.dart';
+import 'package:flutterRedux/domain/model/pet.dart';
 import 'package:flutterRedux/domain/model/session.dart';
 import 'package:flutterRedux/redux/action/account.dart';
+import 'package:flutterRedux/redux/action/add_pet.dart';
 import 'package:flutterRedux/redux/action/config.dart';
 import 'package:flutterRedux/redux/middleware/requestlogging.dart';
 import 'package:redux/redux.dart';
@@ -17,18 +19,23 @@ class AppState {
   final Config config;
   final int currentTab;
 
+  // Add Pet Screen
+  final Pet petToAdd;
+
   AppState({
     @required this.account,
     @required this.session,
     @required this.config,
     @required this.currentTab,
+    @required this.petToAdd,
   });
 
   AppState.initialState() :
         account = Stateful(data: Account()),
         session = Stateful(data: Session()),
         config = Config(),
-        currentTab = 0;
+        currentTab = 0,
+        petToAdd = Pet();
 }
 
 // Reducers
@@ -37,7 +44,8 @@ AppState appStateReducer(AppState state, action) {
     account: accountReducer(state.account, action),
     session: sessionReducer(state.session, action),
     config:  configReducer(state.config, action),
-    currentTab: tabNavigationReducer(state.currentTab, action)
+    currentTab: tabNavigationReducer(state.currentTab, action),
+    petToAdd: addPetReducer(state.petToAdd, action)
   );
 }
 

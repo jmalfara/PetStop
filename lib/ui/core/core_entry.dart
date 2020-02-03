@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterRedux/ui/core/core_controller.dart';
 import 'package:flutterRedux/ui/core/home/home_page.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
@@ -25,6 +26,7 @@ class CoreEntry extends StatelessWidget {
                   child: screens[viewModel.currentTab],
                 ),
               ),
+              floatingActionButton: _renderActionButton(viewModel.currentTab),
               bottomNavigationBar: BottomNavigationBar(
                 currentIndex: viewModel.currentTab,
                 onTap: (index) => viewModel.currentTab = index,
@@ -44,5 +46,16 @@ class CoreEntry extends StatelessWidget {
                 ],
               ),
             ));
+  }
+
+  _renderActionButton(int currentTab) {
+    if (currentTab == 0) {
+      return FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => controlHandleAddPetAction(),
+      );
+    }
+
+    return Container();
   }
 }

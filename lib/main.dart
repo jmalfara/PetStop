@@ -31,6 +31,9 @@ class MyApp extends StatelessWidget {
             shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
           )
         ),
+        darkTheme: ThemeData(
+            scaffoldBackgroundColor: Colors.grey,
+        ),
         initialRoute: RouteGenerator.routeInitialization,
         onGenerateRoute: RouteGenerator.generateRoute,
       )

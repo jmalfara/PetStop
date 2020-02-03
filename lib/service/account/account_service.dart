@@ -12,6 +12,8 @@ abstract class AccountService {
   Future<Session> login();
 
   Future<Account> getAccount();
+
+  Future<Pet> addPet(Pet pet);
 }
 
 class AccountServiceImpl extends AccountService {
@@ -40,15 +42,23 @@ class AccountServiceImpl extends AccountService {
       pets: [
         Pet(
           name: "Doug",
-          birthday: "2015-02-01",
+          details: "2015-02-01",
           type: PetType.RABBIT
         ),
         Pet(
           name: "Mavric",
-          birthday: "2018-05-23",
+            details: "2018-05-23",
           type: PetType.DOG
         ),
       ]
     );
+  }
+
+  @override
+  Future<Pet> addPet(Pet pet) async {
+    // Simulated call
+    await Future.delayed(Duration(seconds: 5), () {});
+
+    return pet;
   }
 }

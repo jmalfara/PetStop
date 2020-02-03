@@ -18,7 +18,7 @@ class PetList extends StatelessWidget {
             var item = viewModel.account.pets[position];
             return RightImageCard(
               title: item.name,
-              content: item.birthday,
+              content: item.details,
               image: "asdfadfa",
             );
           },

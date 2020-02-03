@@ -20,13 +20,15 @@ void controlHandleLoginLoading(LoginViewModel viewModel) {
 }
 
 void controlHandleAccountSuccess(LoginViewModel viewModel, BuildContext context, Account account) {
+  viewModel.account = account;
+  viewModel.accountState = ValueState.SUCCESS;
   navigatorKey.currentState.pushReplacementNamed(RouteGenerator.routeCore);
 }
 
 void controlHandleAccountFailure(LoginViewModel viewModel, BuildContext context, String error) {
-  viewModel.sessionState = ValueState.LOADING;
+  viewModel.accountState = ValueState.FAILURE;
 }
 
 void controlHandleAccountLoading(LoginViewModel viewModel) {
-  viewModel.sessionState = ValueState.LOADING;
+  viewModel.accountState = ValueState.LOADING;
 }
