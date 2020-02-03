@@ -23,14 +23,12 @@ Stateful<Account> accountReducer(Stateful<Account> prev, action) {
   }
 
   if (action is AddPetAccountAction) {
-    var pets = [
-      ...prev.data.pets,
-      action.pet
-    ];
-
     return prev.copy(
       data: prev.data.copy(
-        pets: pets
+        pets: [
+          ...prev.data.pets,
+          action.pet
+        ]
       )
     );
   }

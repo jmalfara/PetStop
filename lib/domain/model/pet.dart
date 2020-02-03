@@ -26,5 +26,7 @@ enum PetType {
   DOG,
   CAT,
   RABBIT,
-  HAMSTER
+  HAMSTER,
+  FISH,
+  BIRD
 }

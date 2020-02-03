@@ -43,7 +43,6 @@ class LoginEntry extends StatelessWidget {
     );
   }
 
-
   bool _isLoading(LoginViewModel viewModel) {
     return viewModel.sessionState == ValueState.LOADING || viewModel.accountState == ValueState.LOADING;
   }

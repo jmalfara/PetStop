@@ -6,6 +6,7 @@ class Images {
   static const rabbit = "${base}rabbit.svg";
   static const cat = "${base}cat.svg";
   static const hamster = "${base}hamster.svg";
+  static const bird = "${base}bird.svg";
 
   static const petDefault = "${base}paw.svg";
 }

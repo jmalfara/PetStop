@@ -16,6 +16,10 @@ class PetPresenter {
         return Images.rabbit;
       case PetType.HAMSTER:
         return Images.dog;
+      case PetType.FISH:
+        return Images.fish;
+      case PetType.BIRD:
+        return Images.bird;
     }
     return Images.petDefault;
   }
