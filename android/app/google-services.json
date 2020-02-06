@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1086310022052",
+    "firebase_url": "https://petstop-44cd8.firebaseio.com",
+    "project_id": "petstop-44cd8",
+    "storage_bucket": "petstop-44cd8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086310022052:android:458fa78609602dcb8d5f31",
+        "android_client_info": {
+          "package_name": "com.jmat.petstop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086310022052-bmud7knblgsjk837klpqmb08v1eukmq9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jmat.petstop",
+            "certificate_hash": "d4c9db7f2f2cc84ccefdec0f90fee776bca8b91d"
+          }
+        },
+        {
+          "client_id": "1086310022052-opjvto12paon0a8htrq2pabm5hinu2il.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKbXqNoHTsZVD7anb1vArEjAI3Amr-BfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086310022052-opjvto12paon0a8htrq2pabm5hinu2il.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

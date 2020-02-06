@@ -1,4 +1,4 @@
-package com.jmat.flutterRedux
+package com.jmat.petstop
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
