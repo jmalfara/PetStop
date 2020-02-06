@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:flutterRedux/redux/appstate.dart';
-import 'package:flutterRedux/ui/router_generator.dart';
+import 'package:petstop/redux/appstate.dart';
+import 'package:petstop/ui/router_generator.dart';
 
 void main() => runApp(MyApp());
 

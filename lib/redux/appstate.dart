@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutterRedux/base/stateful.dart';
-import 'package:flutterRedux/domain/model/account.dart';
-import 'package:flutterRedux/domain/model/config.dart';
-import 'package:flutterRedux/domain/model/pet.dart';
-import 'package:flutterRedux/domain/model/session.dart';
-import 'package:flutterRedux/redux/action/account.dart';
-import 'package:flutterRedux/redux/action/add_pet.dart';
-import 'package:flutterRedux/redux/action/config.dart';
-import 'package:flutterRedux/redux/middleware/requestlogging.dart';
+import 'package:petstop/base/stateful.dart';
+import 'package:petstop/domain/model/account.dart';
+import 'package:petstop/domain/model/config.dart';
+import 'package:petstop/domain/model/pet.dart';
+import 'package:petstop/domain/model/session.dart';
+import 'package:petstop/redux/action/account.dart';
+import 'package:petstop/redux/action/add_pet.dart';
+import 'package:petstop/redux/action/config.dart';
+import 'package:petstop/redux/middleware/requestlogging.dart';
 import 'package:redux/redux.dart';
-import 'package:flutterRedux/redux/action/tab_navigation.dart';
+import 'package:petstop/redux/action/tab_navigation.dart';
 
 import 'action/session.dart';
 

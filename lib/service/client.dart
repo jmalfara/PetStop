@@ -1,5 +1,5 @@
 import 'package:http/http.dart';
-import 'package:flutterRedux/service/response.dart';
+import 'package:petstop/service/response.dart';
 
 import 'package:http/http.dart' as http;
 

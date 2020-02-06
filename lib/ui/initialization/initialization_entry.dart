@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutterRedux/ui/initialization/initialization_controller.dart';
+import 'package:petstop/ui/initialization/initialization_controller.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:flutterRedux/redux/appstate.dart';
+import 'package:petstop/redux/appstate.dart';
 
 import 'initialization_viewmodel.dart';
-import 'package:flutterRedux/base/extensions/streamextensions.dart';
+import 'package:petstop/base/extensions/streamextensions.dart';
 
 class InitializationEntry extends StatelessWidget {
   @override

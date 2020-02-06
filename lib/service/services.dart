@@ -1,6 +1,6 @@
-import 'package:flutterRedux/service/account/account_service.dart';
-import 'package:flutterRedux/service/client.dart';
-import 'package:flutterRedux/service/config/config_service.dart';
+import 'package:petstop/service/account/account_service.dart';
+import 'package:petstop/service/client.dart';
+import 'package:petstop/service/config/config_service.dart';
 
 abstract class Services {
   AccountService accountService;

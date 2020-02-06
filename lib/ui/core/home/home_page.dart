@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterRedux/base/component/empty_state.dart';
-import 'package:flutterRedux/base/info/text_info.dart';
-import 'package:flutterRedux/base/presenters/pet_presenter.dart';
-import 'package:flutterRedux/domain/model/pet.dart';
-import 'package:flutterRedux/redux/appstate.dart';
-import 'package:flutterRedux/resources/images.dart';
+import 'package:petstop/base/component/empty_state.dart';
+import 'package:petstop/base/info/text_info.dart';
+import 'package:petstop/base/presenters/pet_presenter.dart';
+import 'package:petstop/domain/model/pet.dart';
+import 'package:petstop/redux/appstate.dart';
+import 'package:petstop/resources/images.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:redux/redux.dart';
@@ -40,8 +40,6 @@ class HomePage extends StatelessWidget {
       child: EmptyState(
         message: TextInfo(raw: "Add your first pet.\nStart with clicking below."),
         imagePath: Images.dog,
-        action: () => print("Click Action"),
-        actionText: TextInfo(raw: "Add a Pet"),
       )
     );
   }

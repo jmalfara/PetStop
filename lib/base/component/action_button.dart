@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterRedux/base/info/text_info.dart';
+import 'package:petstop/base/info/text_info.dart';
 
 class ActionButton extends StatelessWidget {
   final TextInfo text;

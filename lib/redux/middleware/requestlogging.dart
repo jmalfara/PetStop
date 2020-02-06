@@ -1,5 +1,5 @@
-import 'package:flutterRedux/base/extensions/streamextensions.dart';
-import 'package:flutterRedux/service/response.dart';
+import 'package:petstop/base/extensions/streamextensions.dart';
+import 'package:petstop/service/response.dart';
 import 'package:redux/redux.dart';
 
 import '../appstate.dart';

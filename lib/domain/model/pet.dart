@@ -1,9 +1,11 @@
 class Pet {
+  final String id;
   final String name;
   final String details;
   final PetType type;
 
   Pet({
+    this.id,
     this.name,
     this.details,
     this.type
@@ -15,6 +17,7 @@ class Pet {
     PetType type,
   }) {
     return Pet(
+      id: id,
       name: name ?? this.name,
       details: details ?? this.details,
       type: type ?? this.type

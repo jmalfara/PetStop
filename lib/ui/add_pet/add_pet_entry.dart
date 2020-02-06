@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterRedux/base/info/text_info.dart';
-import 'package:flutterRedux/ui/add_pet/add_pet_page.dart';
+import 'package:petstop/base/info/text_info.dart';
+import 'package:petstop/ui/add_pet/add_pet_page.dart';
 
 class AddPetEntry extends StatelessWidget {
 

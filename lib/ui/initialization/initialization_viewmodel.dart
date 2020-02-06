@@ -1,9 +1,9 @@
-import 'package:flutterRedux/base/viewmodel/viewmodel.dart';
-import 'package:flutterRedux/domain/model/config.dart';
-import 'package:flutterRedux/redux/action/config.dart';
-import 'package:flutterRedux/service/response.dart';
+import 'package:petstop/base/viewmodel/viewmodel.dart';
+import 'package:petstop/domain/model/config.dart';
+import 'package:petstop/redux/action/config.dart';
+import 'package:petstop/service/response.dart';
 import 'package:redux/redux.dart';
-import 'package:flutterRedux/redux/appstate.dart';
+import 'package:petstop/redux/appstate.dart';
 
 class InitializationViewModel extends ViewModel {
   InitializationViewModel(Store<AppState> store) : super(store);

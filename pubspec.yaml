@@ -1,4 +1,4 @@
-name: flutterRedux
+name: petstop
 description: A new Flutter application.
 
 # The following defines the version and build number for your application.
@@ -19,6 +19,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^0.4.0+9
+  firebase_auth: ^0.14.0+5
+  cloud_firestore: ^0.12.9+5
+  google_sign_in: ^4.1.1
   redux: ^4.0.0
   flutter_redux: ^0.6.0
   http: ^0.12.0+4

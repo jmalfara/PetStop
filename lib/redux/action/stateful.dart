@@ -1,4 +1,4 @@
-import 'package:flutterRedux/base/stateful.dart';
+import 'package:petstop/base/stateful.dart';
 
 class UpdateStatefulAction<T> {
   ValueState state;

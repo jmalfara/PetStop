@@ -1,9 +1,9 @@
-import 'package:flutterRedux/base/viewmodel/viewmodel.dart';
-import 'package:flutterRedux/domain/model/account.dart';
-import 'package:flutterRedux/service/response.dart';
+import 'package:petstop/base/viewmodel/viewmodel.dart';
+import 'package:petstop/domain/model/account.dart';
+import 'package:petstop/service/response.dart';
 import 'package:redux/redux.dart';
-import 'package:flutterRedux/redux/appstate.dart';
-import 'package:flutterRedux/redux/action/tab_navigation.dart';
+import 'package:petstop/redux/appstate.dart';
+import 'package:petstop/redux/action/tab_navigation.dart';
 
 class CoreViewModel extends ViewModel {
   CoreViewModel(Store<AppState> store) : super(store);

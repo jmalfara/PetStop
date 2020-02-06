@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterRedux/base/component/action_button.dart';
-import 'package:flutterRedux/base/dimen.dart';
-import 'package:flutterRedux/base/form/grid_form_feild.dart';
-import 'package:flutterRedux/base/info/text_info.dart';
-import 'package:flutterRedux/base/stateful.dart';
-import 'package:flutterRedux/base/validators/validator.dart';
-import 'package:flutterRedux/domain/model/pet.dart';
-import 'package:flutterRedux/main.dart';
-import 'package:flutterRedux/redux/appstate.dart';
-import 'package:flutterRedux/resources/images.dart';
-import 'package:flutterRedux/ui/add_pet/add_pet_viewmodel.dart';
+import 'package:petstop/base/component/action_button.dart';
+import 'package:petstop/base/dimen.dart';
+import 'package:petstop/base/form/grid_form_feild.dart';
+import 'package:petstop/base/info/text_info.dart';
+import 'package:petstop/base/stateful.dart';
+import 'package:petstop/base/validators/validator.dart';
+import 'package:petstop/domain/model/pet.dart';
+import 'package:petstop/main.dart';
+import 'package:petstop/redux/appstate.dart';
+import 'package:petstop/resources/images.dart';
+import 'package:petstop/ui/add_pet/add_pet_viewmodel.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:redux/redux.dart';
-import 'package:flutterRedux/base/extensions/streamextensions.dart';
+import 'package:petstop/base/extensions/streamextensions.dart';
 
 import 'add_pet_controller.dart';
 

@@ -1,5 +1,5 @@
-import 'package:flutterRedux/domain/model/pet.dart';
-import 'package:flutterRedux/domain/model/session.dart';
+import 'package:petstop/domain/model/pet.dart';
+import 'package:petstop/domain/model/session.dart';
 
 class Account {
   final String id;

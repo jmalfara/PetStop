@@ -1,4 +1,4 @@
-import 'package:flutterRedux/domain/model/config.dart';
+import 'package:petstop/domain/model/config.dart';
 
 class StoreConfigAction {
   Config config;

@@ -1,6 +1,6 @@
-import 'package:flutterRedux/base/stateful.dart';
-import 'package:flutterRedux/domain/model/session.dart';
-import 'package:flutterRedux/redux/action/stateful.dart';
+import 'package:petstop/base/stateful.dart';
+import 'package:petstop/domain/model/session.dart';
+import 'package:petstop/redux/action/stateful.dart';
 
 class StoreSessionAction {
   Session session;

@@ -1,4 +1,4 @@
-import 'package:flutterRedux/domain/model/pet.dart';
+import 'package:petstop/domain/model/pet.dart';
 
 class UpdateNamePetAction {
   final String name;

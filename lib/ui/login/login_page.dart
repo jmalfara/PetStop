@@ -8,17 +8,21 @@ import 'package:petstop/redux/appstate.dart';
 import 'package:petstop/ui/login/login_viewmodel.dart';
 import 'package:petstop/base/extensions/streamextensions.dart';
 
-class LoginEntry extends StatelessWidget {
+class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, LoginViewModel>(
-        converter: (Store<AppState> store) => LoginViewModel(store),
-        builder: (BuildContext context, LoginViewModel viewModel) => Scaffold(
-              body: Center(
-                  child: _isLoading(viewModel)
-                      ? _renderLoading()
-                      : _renderLogin(context, viewModel)),
-            ));
+      onInitialBuild: (viewModel) => viewModel.onFetchAccount().singleObserve(
+          success: (account) => controlHandleLoginSuccess(viewModel, context, account),
+          failure: (error) => controlHandleLoginFailure(viewModel, context, error),
+          loading: () => controlHandleLoginLoading(viewModel)
+      ),
+      converter: (Store<AppState> store) => LoginViewModel(store),
+      builder: (BuildContext context, LoginViewModel viewModel) => Center(
+          child: viewModel.accountState == ValueState.LOADING
+              ? _renderLoading()
+              : _renderLogin(context, viewModel)),
+    );
   }
 
   _renderLoading() {
@@ -27,23 +31,12 @@ class LoginEntry extends StatelessWidget {
 
   _renderLogin(BuildContext context, LoginViewModel viewModel) {
     return FlatButton(
-      onPressed: () => viewModel.onRequestLogin("username", "password").singleObserve(
-        success: (session) {
-          viewModel.onFetchAccountRequest().singleObserve(
-              success: (account) => controlHandleAccountSuccess(viewModel, context, account),
-              failure: (error) => controlHandleAccountFailure(viewModel, context, error),
-              loading: () => controlHandleAccountLoading(viewModel)
-          );
-          controlHandleLoginSuccess(viewModel, context, session);
-        },
-        failure: (error) => controlHandleLoginFailure(viewModel, context, error),
-        loading: () => controlHandleLoginLoading(viewModel)
-      ),
-      child: Text("Start Login"),
+      onPressed: () => viewModel
+          .onSignInWithGoogle().singleObserve(
+              success: (session) => controlHandleLoginSuccess(viewModel, context, session),
+              failure: (error) => controlHandleLoginFailure(viewModel, context, error),
+              loading: () => controlHandleLoginLoading(viewModel)),
+      child: Text("SignIn With Google"),
     );
-  }
-
-  bool _isLoading(LoginViewModel viewModel) {
-    return viewModel.sessionState == ValueState.LOADING || viewModel.accountState == ValueState.LOADING;
   }
 }

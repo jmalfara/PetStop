@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterRedux/base/dimen.dart';
-import 'package:flutterRedux/base/info/text_info.dart';
+import 'package:petstop/base/dimen.dart';
+import 'package:petstop/base/info/text_info.dart';
 import 'package:flutter_svg/svg.dart';
 
 class EmptyState extends StatelessWidget {

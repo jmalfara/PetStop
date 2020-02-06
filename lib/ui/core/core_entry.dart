@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterRedux/ui/core/core_controller.dart';
-import 'package:flutterRedux/ui/core/home/home_page.dart';
+import 'package:petstop/ui/core/core_controller.dart';
+import 'package:petstop/ui/core/home/home_page.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:flutterRedux/redux/appstate.dart';
-import 'package:flutterRedux/ui/core/core_viewmodel.dart';
+import 'package:petstop/redux/appstate.dart';
+import 'package:petstop/ui/core/core_viewmodel.dart';
 
 class CoreEntry extends StatelessWidget {
 

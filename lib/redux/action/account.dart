@@ -1,16 +1,11 @@
-import 'package:flutterRedux/base/stateful.dart';
-import 'package:flutterRedux/domain/model/account.dart';
-import 'package:flutterRedux/domain/model/pet.dart';
-import 'package:flutterRedux/redux/action/stateful.dart';
+import 'package:petstop/base/stateful.dart';
+import 'package:petstop/domain/model/account.dart';
+import 'package:petstop/domain/model/pet.dart';
+import 'package:petstop/redux/action/stateful.dart';
 
 class StoreAccountAction {
   final Account account;
   StoreAccountAction(this.account);
-}
-
-class AddPetAccountAction {
-  final Pet pet;
-  AddPetAccountAction(this.pet);
 }
 
 Stateful<Account> accountReducer(Stateful<Account> prev, action) {
@@ -20,17 +15,6 @@ Stateful<Account> accountReducer(Stateful<Account> prev, action) {
 
   if (action is StoreAccountAction) {
     return prev.copy(data: action.account);
-  }
-
-  if (action is AddPetAccountAction) {
-    return prev.copy(
-      data: prev.data.copy(
-        pets: [
-          ...prev.data.pets,
-          action.pet
-        ]
-      )
-    );
   }
 
   return prev;

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterRedux/ui/add_pet/add_pet_entry.dart';
-import 'package:flutterRedux/ui/core/core_entry.dart';
-import 'package:flutterRedux/ui/initialization/initialization_entry.dart';
-import 'package:flutterRedux/ui/login/login_entry.dart';
+import 'package:petstop/ui/add_pet/add_pet_entry.dart';
+import 'package:petstop/ui/core/core_entry.dart';
+import 'package:petstop/ui/initialization/initialization_entry.dart';
+import 'package:petstop/ui/login/login_entry.dart';
 
 class RouteGenerator {
   static const routeInitialization = "/";

@@ -1,5 +1,5 @@
-import 'package:flutterRedux/domain/model/config.dart';
-import 'package:flutterRedux/service/client.dart';
+import 'package:petstop/domain/model/config.dart';
+import 'package:petstop/service/client.dart';
 
 abstract class ConfigService {
   Client client;

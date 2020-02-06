@@ -1,4 +1,4 @@
-# flutterRedux
+# petstop
 
 A new Flutter application.
 

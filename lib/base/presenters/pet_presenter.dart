@@ -1,5 +1,5 @@
-import 'package:flutterRedux/domain/model/pet.dart';
-import 'package:flutterRedux/resources/images.dart';
+import 'package:petstop/domain/model/pet.dart';
+import 'package:petstop/resources/images.dart';
 
 class PetPresenter {
   final Pet pet;

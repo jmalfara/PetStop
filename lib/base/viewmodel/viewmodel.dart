@@ -1,9 +1,9 @@
 import 'package:async/async.dart';
-import 'package:flutterRedux/base/preferences/preferences.dart';
-import 'package:flutterRedux/redux/appstate.dart';
-import 'package:flutterRedux/redux/middleware/requestlogging.dart';
-import 'package:flutterRedux/service/response.dart';
-import 'package:flutterRedux/service/services.dart';
+import 'package:petstop/base/preferences/preferences.dart';
+import 'package:petstop/redux/appstate.dart';
+import 'package:petstop/redux/middleware/requestlogging.dart';
+import 'package:petstop/service/response.dart';
+import 'package:petstop/service/services.dart';
 import 'package:redux/redux.dart';
 
 class ViewModel {

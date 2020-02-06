@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutterRedux/service/response.dart';
+import 'package:petstop/service/response.dart';
 
 empty([c]) {}
 
