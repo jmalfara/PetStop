@@ -12,7 +12,7 @@ class AddPetViewModel extends ViewModel {
   AddPetViewModel(Store<AppState> store) : super(store);
 
   Stream<ServiceResponse<Pet>> onAddPet(Pet pet) {
-    return executeRequest(() => services.accountService.addPet(pet));
+    return executeRequest(() => services.petsService.addPet(pet));
   }
 
   set accountState(ValueState state) => store.dispatch(UpdateStatefulAction(state, store.state.account));

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:async/async.dart';
 import 'package:petstop/base/preferences/preferences.dart';
 import 'package:petstop/redux/appstate.dart';
@@ -14,6 +16,37 @@ class ViewModel {
   Services get services => _services;
 
   ViewModel(this.store);
+
+  StreamController<ServiceResponse<T>> executeStreamedRequest<T>(Stream<T> Function() requestFunction) {
+    var streamController = _executeStreamedRequest(requestFunction);
+    store.dispatch(RequestAction(streamController.stream));
+    return streamController;
+  }
+
+  StreamController<ServiceResponse<T>> _executeStreamedRequest<T>(Stream<T> Function() requestFunction)  {
+    var streamTransformer = StreamTransformer<T, ServiceResponse<T>>.fromHandlers(
+      handleData: (T response, EventSink sink) => sink.add(ServiceResponse<T>(
+          state: RequestState.SUCCESS,
+          success: response
+      )),
+      handleError: (Object error, StackTrace stacktrace, EventSink sink) => sink.addError(ServiceResponse<T>(
+          state: RequestState.FAILURE,
+          error: error.toString()
+      )),
+      handleDone: (EventSink sink) {
+        print("Closing execute Stream Sink");
+        sink.close();
+      },
+    );
+
+    Stream<ServiceResponse<T>> stream = requestFunction().transform(streamTransformer).asBroadcastStream();
+
+    StreamController<ServiceResponse<T>> streamController = StreamController.broadcast();
+    streamController.addStream(stream).then((data) {
+      streamController.sink.add(ServiceResponse(state: RequestState.LOADING));
+    });
+    return streamController;
+  }
 
   Stream<ServiceResponse<T>> executeRequest<T>(Future<T> Function() requestFunction) {
     var stream = _executeRequest(requestFunction).asBroadcastStream();

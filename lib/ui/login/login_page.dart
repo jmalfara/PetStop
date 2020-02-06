@@ -12,11 +12,6 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, LoginViewModel>(
-      onInitialBuild: (viewModel) => viewModel.onFetchAccount().singleObserve(
-          success: (account) => controlHandleLoginSuccess(viewModel, context, account),
-          failure: (error) => controlHandleLoginFailure(viewModel, context, error),
-          loading: () => controlHandleLoginLoading(viewModel)
-      ),
       converter: (Store<AppState> store) => LoginViewModel(store),
       builder: (BuildContext context, LoginViewModel viewModel) => Center(
           child: viewModel.accountState == ValueState.LOADING

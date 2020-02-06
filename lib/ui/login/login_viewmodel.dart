@@ -10,10 +10,6 @@ import 'package:petstop/base/viewmodel/viewmodel.dart';
 class LoginViewModel extends ViewModel {
   LoginViewModel(Store<AppState> store) : super(store);
 
-  Stream<ServiceResponse<Account>> onFetchAccount() {
-    return executeRequest<Account>(services.accountService.getAccount);
-  }
-
   Stream<ServiceResponse<Account>> onSignInWithGoogle() {
     return executeRequest<Account>(services.accountService.signInWithGoogle);
   }

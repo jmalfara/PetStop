@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:petstop/base/component/empty_state.dart';
 import 'package:petstop/base/info/text_info.dart';
 import 'package:petstop/base/presenters/pet_presenter.dart';
+import 'package:petstop/base/extensions/streamextensions.dart';
 import 'package:petstop/domain/model/pet.dart';
 import 'package:petstop/redux/appstate.dart';
 import 'package:petstop/resources/images.dart';
@@ -13,24 +14,35 @@ import 'package:redux/redux.dart';
 import '../core_viewmodel.dart';
 
 class HomePage extends StatelessWidget {
+  CoreViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, CoreViewModel>(
+      onInitialBuild: (viewModel) {
+        this.viewModel = viewModel;
+
+        viewModel.onStreamAccount().singleObserveForever(
+          success: (pets) => viewModel.pets = pets,
+          failure: (error) => print(error),
+          loading: () => print("Loading")
+        );
+      },
+      onDispose: (Store<AppState> store) => viewModel.closeStreamAccount(),
       converter: (Store<AppState> store) => CoreViewModel(store),
       builder: (BuildContext context, CoreViewModel viewModel) => _renderPage(viewModel)
     );
   }
 
   _renderPage(CoreViewModel viewModel) {
-    if (viewModel.account.pets.length == 0) {
+    if (viewModel.pets.length == 0) {
       return _renderEmptyState();
     }
 
     return ListView.builder(
-      itemCount: viewModel.account.pets.length,
+      itemCount: viewModel.pets.length,
       itemBuilder: (BuildContext context, int index) =>
-          _renderListTile(viewModel.account.pets[index])
+          _renderListTile(viewModel.pets[index])
     );
   }
 

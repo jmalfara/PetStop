@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,8 +18,6 @@ abstract class AccountService {
   Future<Account> signInWithGoogle();
 
   Future<Account> getAccount();
-
-  Future<Pet> addPet(Pet pet);
 }
 
 class AccountServiceImpl extends AccountService {
@@ -44,62 +43,34 @@ class AccountServiceImpl extends AccountService {
     await FirebaseAuth.instance.signInWithCredential(credential);
     print("Logged in");
 
-    return getAccount();
+    FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
+
+    return Account(
+      id: currentUser.uid,
+      email: currentUser.email,
+      name: currentUser.displayName,
+    );
   }
 
   @override
-  getAccount() async {
+  Future<Account> getAccount() async {
     FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
     DocumentSnapshot data = await Firestore.instance.collection("users").document(currentUser.uid).get();
-    
+
     if (!data.exists) {
       Map<String, String> introData = Map();
       introData.putIfAbsent("createdAt", () => "${new DateTime.now().millisecondsSinceEpoch}");
       Firestore.instance.collection("users").document(currentUser.uid).setData(introData);
     }
 
-    data.data.forEach((key, value) => print(key));
-    List<Pet> pets = List();
-    (data.data["pets"]).forEach((key, value) {
-      Map<String, String> petMap = Map.from(value);
-      pets.add(Pet(
-        id: key,
-        name: petMap["name"],
-        details: petMap["details"],
-        type: PetType.values.firstWhere((e) => e.toString() == petMap["type"])
-      ));
-    });
-
     return Account(
       id: currentUser.uid,
       email: currentUser.email,
       name: currentUser.displayName,
-      pets: pets
     );
   }
 
-  @override
-  Future<Pet> addPet(Pet pet) async {
-    FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
-    DocumentSnapshot snapshot = await Firestore.instance.collection("users").document(currentUser.uid).get();
 
-    // Merge with existing pet list
-    Map<String, String> petMap = Map();
-    petMap.putIfAbsent("name", () => pet.name);
-    petMap.putIfAbsent("details", () => pet.details);
-    petMap.putIfAbsent("type", () => pet.type.toString());
-
-    int time = new DateTime.now().millisecondsSinceEpoch;
-    Map<String, Map> indexPetMap = Map();
-    indexPetMap.putIfAbsent("$time", () => petMap);
-
-    Map<String, Map> data = Map();
-    data.putIfAbsent("pets", () => indexPetMap);
-
-    Firestore.instance.collection("users").document(currentUser.uid).setData(data, merge: true);
-
-    return pet;
-  }
 
   @override
   Future<bool> sessionCheck() async {

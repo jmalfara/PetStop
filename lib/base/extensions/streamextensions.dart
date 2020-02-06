@@ -29,4 +29,24 @@ extension StreamServiceResponseExtension<T> on Stream<ServiceResponse<T>> {
       }
     });
   }
+
+  singleObserveForever({
+    Function() loading = empty,
+    Function(T data) success = empty,
+    Function(String data) failure = empty,
+  }) {
+    this.listen((data) {
+      switch (data.state) {
+        case RequestState.LOADING:
+          loading();
+          break;
+        case RequestState.FAILURE:
+          failure(data.error);
+          break;
+        case RequestState.SUCCESS:
+          success(data.success);
+          break;
+      }
+    });
+  }
 }
