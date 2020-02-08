@@ -8,19 +8,19 @@ class GridItem<T> {
 }
 
 class GridFormField<T> extends FormField<T> {
+  final GridFormFieldController controller;
 
   GridFormField({
+    this.controller,
     FormFieldSetter<T> onSaved,
     FormFieldValidator<T> validator,
     Function(T) onChange,
     @required List<GridItem<T>> items,
     T initialValue,
-    bool autovalidate = false
   }) : super(
       onSaved: onSaved,
       validator: validator,
       initialValue: initialValue,
-      autovalidate: autovalidate,
       builder: (FormFieldState<T> state) {
         return Column(
           children: <Widget>[
@@ -56,4 +56,20 @@ class GridFormField<T> extends FormField<T> {
         );
       }
   );
+
+  @override
+  FormFieldState<T> createState() {
+    FormFieldState<T> state = super.createState();
+    print("Setting State");
+    controller?.state = state;
+    return state;
+  }
+}
+
+class GridFormFieldController  {
+  FormFieldState state;
+
+  clear() {
+    state.reset();
+  }
 }

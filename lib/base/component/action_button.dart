@@ -6,12 +6,14 @@ class ActionButton extends StatelessWidget {
   final TextInfo text;
   final Function() onPressed;
   final bool loading;
+  final FocusNode focusNode;
 
   const ActionButton({
     Key key,
     this.text,
     this.onPressed,
-    this.loading = false
+    this.loading = false,
+    this.focusNode,
   }) : super(key: key);
 
   @override
@@ -23,7 +25,8 @@ class ActionButton extends StatelessWidget {
           height: 20,
           width: 20,
           child: CircularProgressIndicator()
-      ) : Text(text.toString())
+      ) : Text(text.toString()),
+      focusNode: focusNode,
     );
   }
 }

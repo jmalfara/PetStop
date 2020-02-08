@@ -20,6 +20,11 @@ import 'add_pet_controller.dart';
 
 class AddPetPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  final nameFieldController = TextEditingController();
+  final detailsFieldController = TextEditingController();
+  final petSelectGridController = GridFormFieldController();
+  final detailsFieldNode = FocusNode();
+  final submitButtonNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +34,14 @@ class AddPetPage extends StatelessWidget {
         padding: EdgeInsets.all(Dimensions.margin_medium),
         scrollDirection: Axis.vertical,
         children: <Widget>[
-          _renderInputForm(viewModel),
+          _renderInputForm(context, viewModel),
           _renderSubmitButton(viewModel, context),
         ],
       )
     );
   }
 
-  _renderInputForm(AddPetViewModel viewModel) {
+  _renderInputForm(BuildContext context, AddPetViewModel viewModel) {
     return Form(
         key: _formKey,
         child: Column(
@@ -45,8 +50,8 @@ class AddPetPage extends StatelessWidget {
               _renderTitle(TextInfo(raw: "Select your pet type")),
               _renderPetTypeGrid(viewModel),
               _renderTitle(TextInfo(raw: "Extra details")),
-              _renderNameInput(viewModel),
-              _renderDetailsInput(viewModel),
+              _renderNameInput(context, viewModel),
+              _renderDetailsInput(context, viewModel),
             ]
         )
     );
@@ -56,6 +61,7 @@ class AddPetPage extends StatelessWidget {
     return Padding(
         padding: EdgeInsets.fromLTRB(0, 0, 0, Dimensions.margin_medium),
         child: GridFormField<PetType>(
+          controller: petSelectGridController,
           onChange: (petType) => viewModel.petType = petType,
           validator: (petType) => requiredNotNullValidator(petType, TextInfo(raw: "Select an option")),
           items: [
@@ -70,30 +76,39 @@ class AddPetPage extends StatelessWidget {
     );
   }
 
-  _renderNameInput(AddPetViewModel viewModel) {
+  _renderNameInput(BuildContext context, AddPetViewModel viewModel) {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, 0, Dimensions.margin_medium),
       child: TextFormField(
+        controller: nameFieldController,
         onChanged: (text) => viewModel.petName = text,
         validator: (value) => requiredTextValidator(value, TextInfo(raw: "Required")),
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: TextInfo(raw: "Name").toString(),
         ),
+        onFieldSubmitted: (v){
+          FocusScope.of(context).requestFocus(detailsFieldNode);
+        },
       ),
     );
   }
 
-  _renderDetailsInput(AddPetViewModel viewModel) {
+  _renderDetailsInput(BuildContext context, AddPetViewModel viewModel) {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, 0, Dimensions.margin_medium),
       child: TextFormField(
+        controller: detailsFieldController,
         onChanged: (text) => viewModel.petDetails = text,
         validator: (value) => requiredTextValidator(value, TextInfo(raw: "Required")),
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: TextInfo(raw: "Details").toString(),
         ),
+        focusNode: detailsFieldNode,
+        onFieldSubmitted: (v){
+          FocusScope.of(context).requestFocus(submitButtonNode);
+        },
       ),
     );
   }
@@ -112,7 +127,12 @@ class AddPetPage extends StatelessWidget {
       onPressed: () {
         if (_formKey.currentState.validate()) {
           viewModel.onAddPet(viewModel.pet.copy()).singleObserve(
-              success: (pet) => controlHandleAddPetSuccess(viewModel, context, pet),
+              success: (pet) {
+                petSelectGridController.clear();
+                nameFieldController.clear();
+                detailsFieldController.clear();
+                controlHandleAddPetSuccess(viewModel, context, pet);
+              },
               failure: (error) => controlHandleAddPetFailure(viewModel, context, error),
               loading: () => controlHandleAddPetLoading(viewModel)
           );
@@ -120,6 +140,7 @@ class AddPetPage extends StatelessWidget {
       },
       text: TextInfo(raw: "Submit"),
       loading: viewModel.accountState == ValueState.LOADING,
+      focusNode: submitButtonNode,
     );
   }
 }
