@@ -11,11 +11,7 @@ void controlHandleAddPetLoading(AddPetViewModel viewModel) {
 
 void controlHandleAddPetSuccess(AddPetViewModel viewModel, BuildContext context, Pet pet) {
   viewModel.accountState = ValueState.SUCCESS;
-
-  viewModel.clearNewPetData();
   showSnackbar(context, TextInfo(raw: "Successfully added ${pet.name} as a pet").toString());
-
-//  navigatorKey.currentState.pop();
 }
 
 void controlHandleAddPetFailure(AddPetViewModel viewModel, BuildContext context, String error) {

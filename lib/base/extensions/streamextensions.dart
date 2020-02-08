@@ -9,6 +9,7 @@ extension StreamServiceResponseExtension<T> on Stream<ServiceResponse<T>> {
     Function() loading = empty,
     Function(T data) success = empty,
     Function(String data) failure = empty,
+    Function() any = empty
   }) {
     StreamSubscription subscription;
     subscription = this.listen((data) {
@@ -23,6 +24,8 @@ extension StreamServiceResponseExtension<T> on Stream<ServiceResponse<T>> {
           success(data.success);
           break;
       }
+
+      any();
 
       if (data.state == RequestState.SUCCESS || data.state == RequestState.FAILURE) {
         subscription.cancel();

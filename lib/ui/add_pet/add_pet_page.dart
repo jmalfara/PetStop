@@ -10,19 +10,18 @@ import 'package:petstop/domain/model/pet.dart';
 import 'package:petstop/main.dart';
 import 'package:petstop/redux/appstate.dart';
 import 'package:petstop/resources/images.dart';
+import 'package:petstop/ui/add_pet/add_pet_controller.dart';
 import 'package:petstop/ui/add_pet/add_pet_viewmodel.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:redux/redux.dart';
 import 'package:petstop/base/extensions/streamextensions.dart';
 
-import 'add_pet_controller.dart';
-
 class AddPetPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final nameFieldController = TextEditingController();
   final detailsFieldController = TextEditingController();
-  final petSelectGridController = GridFormFieldController();
+  final petSelectGridController = GridFormFieldController<PetType>();
   final detailsFieldNode = FocusNode();
   final submitButtonNode = FocusNode();
 
@@ -62,7 +61,6 @@ class AddPetPage extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(0, 0, 0, Dimensions.margin_medium),
         child: GridFormField<PetType>(
           controller: petSelectGridController,
-          onChange: (petType) => viewModel.petType = petType,
           validator: (petType) => requiredNotNullValidator(petType, TextInfo(raw: "Select an option")),
           items: [
             GridItem(SvgPicture.asset(Images.dog), PetType.DOG),
@@ -81,7 +79,6 @@ class AddPetPage extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(0, 0, 0, Dimensions.margin_medium),
       child: TextFormField(
         controller: nameFieldController,
-        onChanged: (text) => viewModel.petName = text,
         validator: (value) => requiredTextValidator(value, TextInfo(raw: "Required")),
         decoration: InputDecoration(
           border: OutlineInputBorder(),
@@ -90,6 +87,7 @@ class AddPetPage extends StatelessWidget {
         onFieldSubmitted: (v){
           FocusScope.of(context).requestFocus(detailsFieldNode);
         },
+        textInputAction: TextInputAction.next,
       ),
     );
   }
@@ -99,7 +97,6 @@ class AddPetPage extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(0, 0, 0, Dimensions.margin_medium),
       child: TextFormField(
         controller: detailsFieldController,
-        onChanged: (text) => viewModel.petDetails = text,
         validator: (value) => requiredTextValidator(value, TextInfo(raw: "Required")),
         decoration: InputDecoration(
           border: OutlineInputBorder(),
@@ -109,6 +106,7 @@ class AddPetPage extends StatelessWidget {
         onFieldSubmitted: (v){
           FocusScope.of(context).requestFocus(submitButtonNode);
         },
+        textInputAction: TextInputAction.next,
       ),
     );
   }
@@ -126,7 +124,14 @@ class AddPetPage extends StatelessWidget {
     return ActionButton(
       onPressed: () {
         if (_formKey.currentState.validate()) {
-          viewModel.onAddPet(viewModel.pet.copy()).singleObserve(
+
+          Pet pet = Pet(
+            name: nameFieldController.text,
+            details: detailsFieldController.text,
+            type: petSelectGridController.value()
+          );
+
+          viewModel.onAddPet(pet).singleObserve(
               success: (pet) {
                 petSelectGridController.clear();
                 nameFieldController.clear();
@@ -134,7 +139,8 @@ class AddPetPage extends StatelessWidget {
                 controlHandleAddPetSuccess(viewModel, context, pet);
               },
               failure: (error) => controlHandleAddPetFailure(viewModel, context, error),
-              loading: () => controlHandleAddPetLoading(viewModel)
+              loading: () => controlHandleAddPetLoading(viewModel),
+              any: () => FocusScope.of(context).requestFocus(submitButtonNode)
           );
         }
       },

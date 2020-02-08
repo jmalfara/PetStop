@@ -8,7 +8,7 @@ class GridItem<T> {
 }
 
 class GridFormField<T> extends FormField<T> {
-  final GridFormFieldController controller;
+  final GridFormFieldController<T> controller;
 
   GridFormField({
     this.controller,
@@ -34,7 +34,6 @@ class GridFormField<T> extends FormField<T> {
               children: items.map((item) {
                 return RaisedButton(
                   onPressed: (state.value == item.item) ? null : () {
-                    onChange(item.item);
                     return state.didChange(item.item);
                     },
                   child: item.view,
@@ -60,14 +59,17 @@ class GridFormField<T> extends FormField<T> {
   @override
   FormFieldState<T> createState() {
     FormFieldState<T> state = super.createState();
-    print("Setting State");
     controller?.state = state;
     return state;
   }
 }
 
-class GridFormFieldController  {
-  FormFieldState state;
+class GridFormFieldController<T>  {
+  FormFieldState<T> state;
+
+  T value() {
+    return state.value;
+  }
 
   clear() {
     state.reset();
