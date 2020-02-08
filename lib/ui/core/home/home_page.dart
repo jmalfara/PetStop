@@ -21,7 +21,6 @@ class HomePage extends StatelessWidget {
     return StoreConnector<AppState, CoreViewModel>(
       onInitialBuild: (viewModel) {
         this.viewModel = viewModel;
-
         viewModel.onStreamAccount().singleObserveForever(
           success: (pets) => viewModel.pets = pets,
           failure: (error) => print(error),
