@@ -14,14 +14,14 @@ class InitializationEntry extends StatelessWidget {
         body: Center(
             child: StoreConnector<AppState, InitializationViewModel>(
                 distinct: true,
-                onInitialBuild: (viewModel) => viewModel.onFetchConfig().singleObserve(
-                      success: (data) => controlHandleFetchConfigSuccess(viewModel, context, data)
+                onInitialBuild: (viewModel) => viewModel.onInitialize().singleObserve(
+                      success: (data) => controlHandleInitializationSuccess(viewModel, context, data),
                 ),
                 converter: (Store<AppState> store) => InitializationViewModel(store),
                 builder: (BuildContext context, InitializationViewModel viewModel) =>
                     FlatButton(
-                      onPressed: () => viewModel.onFetchConfig().singleObserve(
-                          success: (data) => controlHandleFetchConfigSuccess(
+                      onPressed: () => viewModel.onInitialize().singleObserve(
+                          success: (data) => controlHandleInitializationSuccess(
                               viewModel, context, data)),
                       child: CircularProgressIndicator()
                     )

@@ -5,7 +5,7 @@ import 'package:petstop/ui/router_generator.dart';
 
 import '../../main.dart';
 
-controlHandleFetchConfigSuccess(InitializationViewModel viewModel, BuildContext context, Config config) {
-  viewModel.config = config;
+controlHandleInitializationSuccess(InitializationViewModel viewModel, BuildContext context, InitializationData initializationData) {
+  viewModel.initializationData = initializationData;
   navigatorKey.currentState.pushReplacementNamed(RouteGenerator.routeLogin);
 }

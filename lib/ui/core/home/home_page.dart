@@ -11,6 +11,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:redux/redux.dart';
 
+import '../core_controller.dart';
 import '../core_viewmodel.dart';
 
 class HomePage extends StatelessWidget {
@@ -64,7 +65,7 @@ class HomePage extends StatelessWidget {
       subtitle: Text(pet.details),
       leading: SvgPicture.asset(imageUrl, width: 50),
       trailing: Icon(Icons.arrow_forward_ios),
-      onTap: () => print("Next Page"),
+      onTap: () => navigateToServices(pet),
     );
   }
 }
