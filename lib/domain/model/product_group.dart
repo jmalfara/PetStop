@@ -1,10 +1,9 @@
-import 'package:petstop/domain/model/pet.dart';
 import 'package:petstop/domain/model/products.dart';
 
 class ProductGroup {
-  final List<Product> dogProducts;
-  final List<Product> catProducts;
-  final List<Product> rabbitProducts;
+  final List<Product> foodProducts;
+  final List<Product> toyProducts;
+  final List<Product> groomingProducts;
 
-  ProductGroup({this.dogProducts, this.catProducts, this.rabbitProducts});
+  ProductGroup({this.foodProducts, this.toyProducts, this.groomingProducts});
 }

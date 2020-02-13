@@ -12,22 +12,36 @@ abstract class ProductsService {
   ProductsService(Client client) :
         client = client;
 
-  Future<ProductGroup> fetchFoodProducts();
+  Future<ProductGroup> fetchRabbitProducts();
 }
 
 class ProductsServiceImpl extends ProductsService {
   ProductsServiceImpl(Client client) : super(client);
 
   @override
-  Future<ProductGroup> fetchFoodProducts() async {
+  Future<ProductGroup> fetchRabbitProducts() async {
+    int limit = 5;
+    String featuredKey = "featured";
+
     //Rabbit
-    QuerySnapshot snapshot = await Firestore.instance.collection("services/food/rabbit").getDocuments();
-    List<Product> rabbitProducts = parseProducts(snapshot);
+    QuerySnapshot foodSnapshot = await Firestore.instance.collection("products/rabbit/food")
+        .limit(limit).where(featuredKey, isEqualTo: true).getDocuments();
+    List<Product> foodProducts = parseProducts(foodSnapshot);
+
+    // Grooming
+    QuerySnapshot groomingSnapshot = await Firestore.instance.collection("products/rabbit/grooming")
+        .limit(limit).where(featuredKey, isEqualTo: true).getDocuments();
+    List<Product> groomingProducts = parseProducts(groomingSnapshot);
+
+    // Toys
+    QuerySnapshot toySnapshot = await Firestore.instance.collection("products/rabbit/toys")
+        .limit(limit).where(featuredKey, isEqualTo: true).getDocuments();
+    List<Product> toyProducts = parseProducts(toySnapshot);
 
     return ProductGroup(
-      dogProducts: List(),
-      catProducts: List(),
-      rabbitProducts: rabbitProducts
+      foodProducts: foodProducts,
+      toyProducts: toyProducts,
+      groomingProducts: groomingProducts,
     );
   }
 
@@ -36,6 +50,7 @@ class ProductsServiceImpl extends ProductsService {
 
     snapshot.documents.forEach((doc) {
       Map<String, dynamic> data = doc.data;
+      print(data);
       product.add(Product(
         name: data["name"],
         description: data["description"],

@@ -3,10 +3,12 @@ import 'package:petstop/base/stateful.dart';
 import 'package:petstop/domain/model/account.dart';
 import 'package:petstop/domain/model/config.dart';
 import 'package:petstop/domain/model/pet.dart';
+import 'package:petstop/domain/model/product_group.dart';
 import 'package:petstop/domain/model/session.dart';
 import 'package:petstop/redux/action/account.dart';
 import 'package:petstop/redux/action/config.dart';
 import 'package:petstop/redux/action/pets.dart';
+import 'package:petstop/redux/action/product_group.dart';
 import 'package:petstop/redux/middleware/requestlogging.dart';
 import 'package:redux/redux.dart';
 import 'package:petstop/redux/action/tab_navigation.dart';
@@ -20,12 +22,16 @@ class AppState {
   final Config config;
   final int currentTab;
 
+  // All animal groups
+  final ProductGroup rabbitProductGroup;
+
   AppState({
     @required this.account,
     @required this.pets,
     @required this.session,
     @required this.config,
     @required this.currentTab,
+    @required this.rabbitProductGroup,
   });
 
   AppState.initialState() :
@@ -33,7 +39,8 @@ class AppState {
         pets = Stateful(data: List()),
         session = Stateful(data: Session()),
         config = Config(),
-        currentTab = 0;
+        currentTab = 0,
+        rabbitProductGroup = null;
 }
 
 // Reducers
@@ -44,6 +51,7 @@ AppState appStateReducer(AppState state, action) {
     session: sessionReducer(state.session, action),
     config:  configReducer(state.config, action),
     currentTab: tabNavigationReducer(state.currentTab, action),
+    rabbitProductGroup: rabbitProductGroupReducer(state.rabbitProductGroup, action),
   );
 }
 
